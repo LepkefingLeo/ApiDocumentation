@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import path from 'node:path';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -22,6 +23,14 @@ async function bootstrap() {
   app.setBaseViewsDir(path.join(__dirname, '..', '..', 'views'));
 
   app.setViewEngine('ejs');
+
+  const config = new DocumentBuilder()
+    .setTitle('Farsangi kölcsönző DOCUMENTATION')
+    .setDescription('A Farsangi kölcsönző alkalmazás API documentációja')
+    .addBearerAuth()
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('apidoc', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 3000);
 }

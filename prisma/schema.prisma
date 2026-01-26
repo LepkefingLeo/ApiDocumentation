@@ -14,3 +14,17 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+enum Size {
+  S
+  M
+  L
+  XL
+}
+
+model Costume {
+  id Int @id @default(autoincrement())
+  name String
+  size Size
+  stock Int
+}
