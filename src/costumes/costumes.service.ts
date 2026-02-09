@@ -3,6 +3,10 @@ import { CreateCostumeDto } from './dto/create-costume.dto';
 import { UpdateCostumeDto } from './dto/update-costume.dto';
 import { PrismaService } from 'src/prisma.service';
 
+/**
+ * A kölcsönzéseket kezelő osztály
+ */
+
 @Injectable()
 export class CostumesService {
   constructor( private readonly db: PrismaService) {}
